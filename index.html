@@ -1,83 +1,166 @@
 <!DOCTYPE HTML>
 <html lang = "en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>My Raga Book</title>
-  <link type="text/css" rel ="stylesheet" href ="style.css">
-   <script src = "script.js"></script>
-  </head>
-  <body>
+    <link type="text/css" rel ="stylesheet" href ="style.css">
+
+</head>
+
+<body>
     <h1>My Raga Book</h1>
 
     <!-- Adding a composition !-->
-  <!-- <form>
+    <form>
+      <input type = "form" placeholder = "Composition Name">
+      <input type = "form" placeholder = "Name of Raga">
 
-    <input type = "form" placeholder = "Composition Name">
-    <input type = "form" placeholder = "Name of Raga">
-    <div class ="tala" id = "tala" value = "">
-    <select name = "Tala">
-      <option value = "Teentaal" selected="">Teentaal</option>
-      <option value = "Ektaal">Ektaal</option>
-      <option value = "Rupak">Rupak</option>
-      <option value = "Jhaptal">Jhaptal</option>
-      <option value = "Dadra">Dadra</option>
-    </select>
-  </div>
-    <select name = "Laya">
-      <option value = "Ati Vilambit">Ati Vilambit</option>
-      <option value = "Vilambit">Vilambit</option>
-      <option value = "Madhya" selected>Madhya</option>
-      <option value = "Drut">Drut</option>
-      <option value = "Ati Drut">Ati Drut</option>
-    </select>
+      <div class ="tala" id = "tala" value = "">
+        <select name = "Tala" id = "talaForm">
+        <option value = "Teentaal" selected="" >Teentaal</option>
+        <option value = "Ektaal">Ektaal</option>
+        <option value = "Jhaptal">Jhaptal</option>
 
-  </form> -->
+        </select>
+      </div>
+      <select name = "Laya">
+        <option value = "Ati Vilambit">Ati Vilambit</option>
+        <option value = "Vilambit">Vilambit</option>
+        <option value = "Madhya" selected>Madhya</option>
+        <option value = "Drut">Drut</option>
+        <option value = "Ati Drut">Ati Drut</option>
+      </select>
+    </form>
 
-  <!-- Teentaal template example !-->
-    <button onclick = "addRaga()">Add 1 more cycle</button>
+    <button onclick = "addRaga()">Add raag
+    <button onclick = "addCycle()">Add 1 more cycle</button>
+    <button onclick = "init()">Clear</button>
 
   <!-- add sargam !-->
-<div>
-<button onclick = "addSa()">Sa</button>
-<button onclick = "addRe()">Re</button>
-<button onclick = "addGa()">Ga</button>
-<button onclick = "addMa()">Ma</button>
-<button onclick = "addPa()">Pa</button>
-<button onclick = "addDha()">Dha</button>
-<button onclick = "addNi()">Ni</button>
+  <div>
+    <button onclick = "addSa()">Sa</button>
+    <button onclick = "addRe()">Re</button>
+    <button onclick = "addGa()">Ga</button>
+    <button onclick = "addMa()">Ma</button>
+    <button onclick = "addPa()">Pa</button>
+    <button onclick = "addDha()">Dha</button>
+    <button onclick = "addNi()">Ni</button>
+    <button onclick = "addRest()">Rest</button>
+  </div>
+
+<!-- rupak template !-->
+
+
+
+
+<!-- ektal template !-->
+
+<div class="ektaal" id="ektaal">
+    <table>
+      <tr>
+        <th>+</th>
+        <th>0</th>
+        <th>2</th>
+        <th>0</th>
+        <th>3</th>
+        <th>0</th>
+      </tr>
+      <!-- sargam -->
+      <tr>
+        <td id = ektalSum>----------- </td>
+        <td id = ektalFirstWave>-----------</td>
+        <td id = ektalSecondClap>-----------</td>
+        <td id = ektalSecondWave>-----------</td>
+        <td id = ektalThirdClap>------------</td>
+        <td id = ektalThirdWave>-----------</td>
+      </tr>
+      <!-- lyrics -->
+      <tr>
+        <td>-------</td>
+        <td>-------</td>
+        <td>-------</td>
+        <td>-------</td>
+        <td>--------</td>
+        <td>---------</td>
+      </tr>
+  </table>
 </div>
 
+<!-- jhaptal template !-->
+
+  <div class="jhaptal" id="jhaptal">
+      <table>
+        <tr>
+          <th>+</th>
+          <th>2</th>
+          <th>0</th>
+          <th>3</th>
+        </tr>
+        <!-- sargam -->
+        <tr>
+          <td id = jhaptalSum>----------- </td>
+          <td id = jhaptalSecondClap>-----------</td>
+          <td id = jhaptalWave>-----------</td>
+          <td id = jhaptalThirdClap>-----------</td>
+        </tr>
+        <!-- lyrics -->
+        <tr>
+          <td>-------</td>
+          <td>-------</td>
+          <td>-------</td>
+          <td>-------</td>
+        </tr>
+    </table>
+  </div>
 
 
+  <!-- Teentaal template example !-->
+  <div class="teenTaal" id="teenTaal">
+    <div class = "initTable">
+    <table>
+        <tr>
+          <th>+</th>
+          <th>2</th>
+          <th>0</th>
+          <th>3</th>
+        </tr>
+        <!-- sargam -->
+        <tr>
+          <td id = sum>----------- </td>
+          <td id = secondClap>-----------</td>
+          <td id = wave>-----------</td>
+          <td id = thirdClap>-----------</td>
+        </tr>
+        <!-- lyrics -->
+        <tr>
+          <td>-------</td>
+          <td>-------</td>
+          <td>-------</td>
+          <td>-------</td>
+        </tr>
+    </table>
+  </div>
 
-    <div class="ragaTemp" id="row1">
-
-        <table>
-          <tr>
-            <th>+</th>
-            <th>2</th>
-            <th>0</th>
-            <th>3</th>
-          </tr>
-          <!-- sargam -->
-          <tr>
-            <td id = clap>----------- </td>
-            <td id = secondClap>-----------</td>
-            <td id = wave>-----------</td>
-            <td id = thirdClap>-----------</td>
-          </tr>
-          <!-- lyrics -->
-          <tr>
-            <td>-------</td>
-            <td>-------</td>
-            <td>-------</td>
-            <td>-------</td>
-          </tr>
-
-
-      </table>
-    </div>
-
-
-  </body>
-  </html>
+  <div class = "newTeenTaalCycle" id = "newTeenTaalCycle">
+  <table>
+      <!-- sargam -->
+      <tr>
+        <td id = sum>----------- </td>
+        <td id = secondClap>-----------</td>
+        <td id = wave>-----------</td>
+        <td id = thirdClap>-----------</td>
+      </tr>
+      <!-- lyrics -->
+      <tr>
+        <td>-------</td>
+        <td>-------</td>
+        <td>-------</td>
+        <td>-------</td>
+      </tr>
+  </table>
+</div>
+</div>
+    <script src = "script.js"></script>
+</body>
+</html>

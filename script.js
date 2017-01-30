@@ -1,7 +1,34 @@
-function addRaga () {
-  	var myDiv = document.getElementById("row1");
-  	var divClone = myDiv.cloneNode(true);
-  	document.getElementById("row1").appendChild(divClone);
+var teenTaal = document.querySelector('#teenTaal');
+var jhaptal = document.querySelector('#jhaptal');
+var ektaal = document.querySelector('#ektaal');
+var newTeenTaalCycle = document.querySelector('#newTeenTaalCycle');
+
+// hide raga templates
+init();
+function init (){
+teenTaal.style.display = 'none';
+jhaptal.style.display = 'none';
+ektaal.style.display = 'none';
+}
+
+//add raga templates according to which one is selected
+function addRaga(){
+  if (document.getElementById("talaForm").value === "Teentaal"){
+      teenTaal.style.display ='block';
+    } else if (document.getElementById("talaForm").value === "Jhaptal"){
+      jhaptal.style.display = 'block';
+    } else if (document.getElementById("talaForm").value === "Ektaal"){
+      ektaal.style.display = 'block';
+    }
+
+}
+
+// add an extra cycle
+function addCycle () {
+  if (document.getElementById("talaForm").value === "Teentaal"){
+  	var divClone = newTeenTaalCycle.cloneNode(true);
+  	teenTaal.appendChild(divClone);
+  }
   }
 
 //adding sargam
@@ -11,31 +38,9 @@ var sargamSecondClap = [];
 var sargamWave = [];
 var sargamThirdClap = [];
 
-
-function displaySargam () {
-  if (sargam.length <= 4){
-  document.getElementById("clap").innerText = sargam;
-  } else if (sargam.length > 4 && sargam.length <= 8) {
-    document.getElementById("secondClap").innerText = sargamSecondClap;
-  } else if (sargam.length <= 12) {
-    document.getElementById("wave").innerText = sargamWave;
-  } else if (sargam.length <= 16){
-    document.getElementById("thirdClap").innertext = sargamThirdClap;
-  }
-}
-
-
 function addSa () {
-  if (sargam.length <= 4){
-  sargam.push('S');
-  displaySargam();
-} else if (sargam.length > 4 && sargam.length <= 8){
-  sargamSecondClap.push('S');
-  displaySargam();
-  } else if (sargam.length <= 12){
-  sargamWave.push('S');
-  displaySargam();
-}
+    sargam.push('S');
+    displaySargam();
 }
 
 function addRe () {
@@ -68,7 +73,24 @@ function addNi () {
   displaySargam();
 }
 
-// add sargam to new array
-// display array in first measure
-// continue to add to the array
-// if array has 4 items, add to next measure
+function addRest () {
+  sargam.push('-');
+  displaySargam();
+}
+
+//display sargam
+
+function displaySargam (){
+  if (sargam.length <= 4){
+     document.getElementById("sum").innerText = sargam;
+   }  else if (sargam.length >= 4 && sargam.length <= 8) {
+        sargamSecondClap = sargam.slice(4,8);
+        document.getElementById("secondClap").innerText = sargamSecondClap;
+   }  else if (sargam.length >= 8 && sargam.length <= 12) {
+        sargamWave = sargam.slice(8,12);
+        document.getElementById("wave").innerText = sargamWave;
+   }  else if (sargam.length >= 12 && sargam.length <= 16) {
+        sargamThirdClap = sargam.slice(12,16);
+        document.getElementById("thirdClap").innerText= sargamThirdClap;
+   }
+}
