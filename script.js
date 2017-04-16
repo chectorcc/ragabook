@@ -1,96 +1,82 @@
-var teenTaal = document.querySelector('#teenTaal');
-var jhaptal = document.querySelector('#jhaptal');
-var ektaal = document.querySelector('#ektaal');
-var newTeenTaalCycle = document.querySelector('#newTeenTaalCycle');
-
-// hide raga templates
-init();
-function init (){
-teenTaal.style.display = 'none';
-jhaptal.style.display = 'none';
-ektaal.style.display = 'none';
-}
-
-//add raga templates according to which one is selected
-function addRaga(){
-  if (document.getElementById("talaForm").value === "Teentaal"){
-      teenTaal.style.display ='block';
-    } else if (document.getElementById("talaForm").value === "Jhaptal"){
-      jhaptal.style.display = 'block';
-    } else if (document.getElementById("talaForm").value === "Ektaal"){
-      ektaal.style.display = 'block';
+// add a cycle
+function addCycle() {
+  // get the reference for the parent tables
+  var tables = document.getElementById('teenTaal');
+  // creates a <table> element and a <tbody> element
+  var tbl = document.createElement("table");
+  var tblBody = document.createElement("tbody");
+  // creating all cells
+  for (var i = 0; i < 2; i++) {
+    // creates a table row
+    var row = document.createElement("tr");
+    for (var j = 0; j < 4; j++) {
+      // Create a <td> element and a text node, make the text
+      // node the contents of the <td>, and put the <td> at
+      // the end of the table row
+      var cell = document.createElement("td");
+      var cellText = document.createTextNode("---------------");
+      cell.appendChild(cellText);
+      row.appendChild(cell);
     }
-
-}
-
-// add an extra cycle
-function addCycle () {
-  if (document.getElementById("talaForm").value === "Teentaal"){
-  	var divClone = newTeenTaalCycle.cloneNode(true);
-  	teenTaal.appendChild(divClone);
+    // add the row to the end of the table body
+    tblBody.appendChild(row);
   }
+ 
+  // put the <tbody> in the <table>
+  tbl.appendChild(tblBody);
+  // appends <table> into parent table
+  tables.appendChild(tbl);
+  // sets the border attribute of tbl to 2 and width to 1350px;
+  tbl.setAttribute("border", "2");
+  tbl.setAttribute('width', '1350px');
+}
+
+//new cycle object constructor 
+function NewCycle(){
+  this.sum = ('');
+  this.secondClap = ('');
+  this.wave = ('');
+  this.thirdClap = ('');
+}
+
+//sargam object 
+var sargam = {
+  cycle1: new NewCycle() 
+}
+
+//variable for keeping track of number of cycles 
+var cycleNum = Object.keys(sargam).length;
+
+//adding and displaying  sargam
+function addNode(note){
+  // variable for keeping track of current cycle (cycle that the note is being added to)
+  var currentCycle = sargam["cycle" + cycleNum]; 
+  // variables for accessing the different sections of each cycle 
+  var current = teenTaal.children[cycleNum - 1];
+  var currentSargam = current.getElementsByTagName('tr')[0];
+  var currentSection = currentSargam.getElementsByTagName('td');
+ 
+  if (currentCycle.sum.length < 4){
+    currentCycle.sum += note;
+    currentSection[0].innerText = currentCycle.sum;
+  } else if (currentCycle.secondClap.length < 4){
+    currentCycle.secondClap += note;
+    currentSection[1].innerText = currentCycle.secondClap;
+  } else if (currentCycle.wave.length < 4){
+    currentCycle.wave += note;
+    currentSection[2].innerText = currentCycle.wave;
+  } else if (currentCycle.thirdClap.length < 4){
+    currentCycle.thirdClap += note;
+    currentSection[3].innerText = currentCycle.thirdClap;
+    //when the thirdClap length is equal to 4  
+  } else if (currentCycle.thirdClap.length === 4 ){
+  	//increase cycle num
+    cycleNum++;
+    //add new cycle
+    sargam['cycle' + cycleNum] = new NewCycle();
+    addCycle();
+    //add note to that cycle 
+    sargam['cycle' + cycleNum].sum += note
   }
-
-//adding sargam
-
-var sargam = [];
-var sargamSecondClap = [];
-var sargamWave = [];
-var sargamThirdClap = [];
-
-function addSa () {
-    sargam.push('S');
-    displaySargam();
 }
 
-function addRe () {
-  sargam.push('R');
-  displaySargam();
-}
-
-function addGa () {
-  sargam.push('G');
-  displaySargam();
-}
-
-function addMa () {
-  sargam.push('M');
-  displaySargam();
-}
-
-function addPa () {
-  sargam.push('P');
-  displaySargam();
-}
-
-function addDha () {
-  sargam.push('D');
-  displaySargam();
-}
-
-function addNi () {
-  sargam.push('N');
-  displaySargam();
-}
-
-function addRest () {
-  sargam.push('-');
-  displaySargam();
-}
-
-//display sargam
-
-function displaySargam (){
-  if (sargam.length <= 4){
-     document.getElementById("sum").innerText = sargam;
-   }  else if (sargam.length >= 4 && sargam.length <= 8) {
-        sargamSecondClap = sargam.slice(4,8);
-        document.getElementById("secondClap").innerText = sargamSecondClap;
-   }  else if (sargam.length >= 8 && sargam.length <= 12) {
-        sargamWave = sargam.slice(8,12);
-        document.getElementById("wave").innerText = sargamWave;
-   }  else if (sargam.length >= 12 && sargam.length <= 16) {
-        sargamThirdClap = sargam.slice(12,16);
-        document.getElementById("thirdClap").innerText= sargamThirdClap;
-   }
-}
