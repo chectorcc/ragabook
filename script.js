@@ -21,7 +21,7 @@ function addCycle() {
     // add the row to the end of the table body
     tblBody.appendChild(row);
   }
- 
+
   // put the <tbody> in the <table>
   tbl.appendChild(tblBody);
   // appends <table> into parent table
@@ -31,7 +31,7 @@ function addCycle() {
   tbl.setAttribute('width', '1350px');
 }
 
-//new cycle object constructor 
+//new cycle object constructor
 function NewCycle(){
   this.sum = ('');
   this.secondClap = ('');
@@ -39,23 +39,24 @@ function NewCycle(){
   this.thirdClap = ('');
 }
 
-//sargam object 
+//sargam object
 var sargam = {
-  cycle1: new NewCycle() 
+  cycle1: new NewCycle()
 }
 
-//variable for keeping track of number of cycles 
+//variable for keeping track of number of cycles
 var cycleNum = Object.keys(sargam).length;
 
 //adding and displaying  sargam
 function addNode(note){
   // variable for keeping track of current cycle (cycle that the note is being added to)
-  var currentCycle = sargam["cycle" + cycleNum]; 
-  // variables for accessing the different sections of each cycle 
+  debugger;
+  var currentCycle = sargam["cycle" + cycleNum];
+  // variables for accessing the different sections of each cycle
   var current = teenTaal.children[cycleNum - 1];
   var currentSargam = current.getElementsByTagName('tr')[0];
   var currentSection = currentSargam.getElementsByTagName('td');
- 
+
   if (currentCycle.sum.length < 4){
     currentCycle.sum += note;
     currentSection[0].innerText = currentCycle.sum;
@@ -68,15 +69,14 @@ function addNode(note){
   } else if (currentCycle.thirdClap.length < 4){
     currentCycle.thirdClap += note;
     currentSection[3].innerText = currentCycle.thirdClap;
-    //when the thirdClap length is equal to 4  
+    //when the thirdClap length is equal to 4
   } else if (currentCycle.thirdClap.length === 4 ){
   	//increase cycle num
     cycleNum++;
     //add new cycle
     sargam['cycle' + cycleNum] = new NewCycle();
     addCycle();
-    //add note to that cycle 
+    //add note to that cycle
     sargam['cycle' + cycleNum].sum += note
   }
 }
-
